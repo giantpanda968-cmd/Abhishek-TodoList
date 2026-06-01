@@ -3,7 +3,7 @@ import React from "react";
 const AddTask = ({ title, setTitle, onsubmithandler }) => {
   return (
     <form
-      className="flex flex-col gap-4"
+      className="flex flex-col gap-4 mt-5"
       onSubmit={(e) => {
         onsubmithandler(e);
       }}
