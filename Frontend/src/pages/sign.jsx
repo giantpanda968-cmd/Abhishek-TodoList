@@ -184,7 +184,7 @@ const Sign = () => {
           <div className="w-full h-fit flex justify-center items-center bg-white border rounded-md px-3 mt-3 md:rounded-sm md:mt-2">
             <img src={Mail} className="w-4 h-4" />
             <input
-              type="emain"
+              type="email"
               placeholder="Emain or Username"
               className=" w-full bg-white py-3 md:py-1 px-3 rounded-md outline-0 text-md"
               value={Email}
@@ -197,7 +197,7 @@ const Sign = () => {
           <div className="w-full h-fit flex justify-center items-center bg-white border rounded-md px-3 mt-3 md:rounded-sm md:mt-2">
             <img src={Locked} className="w-4 h-4"/>
             <input
-              type={showPass?"text":"Password"}
+              type={showPass?"text":"password"}
               placeholder="Password"
               className="w-full bg-white py-3 md:py-1 px-3 rounded-md outline-0 text-md"
               value={Password}

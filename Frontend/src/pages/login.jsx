@@ -5,41 +5,38 @@ import Check from "../assests/check.png";
 import EmailImg from "../assests/email.png";
 import Locked from "../assests/locked-computer.png";
 import Man from "../assests/man.jpeg";
-import View from "../assests/view.png"
+import View from "../assests/view.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-   const [ErrorMsg,setErrorMsg]=useState("");
+  const [ErrorMsg, setErrorMsg] = useState("");
+  const [showPass, setShowPass] = useState(false);
+
   const Navigate = useNavigate();
-  const onSubmitHandler =async (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
 
-    if(!Email.trim()||!Password.trim()){
+    if (!Email.trim() || !Password.trim()) {
       setErrorMsg("Please fill in all fields!");
       return;
     }
-    try{
-    await axios.post(
-      "/api/auth/login",
-      {Email,Password},
-      {withCredentials:true}
-    );
-    Navigate("/feed")
-  }catch(error){
-    setErrorMsg(error.response?.data?.message)
-  }
-
-    console.log("Email=",Email);
-    console.log("Password=",Password);
+    try {
+      await axios.post(
+        "/api/auth/login",
+        { Email, Password },
+        { withCredentials: true },
+      );
+      Navigate("/feed");
+    } catch (error) {
+      setErrorMsg(error.response?.data?.message);
+    }
 
     setEmail("");
     setPassword("");
   };
-
-
 
   const signPage = () => {
     setTimeout(() => {
@@ -155,7 +152,7 @@ const Login = () => {
           <div className="w-full h-fit flex justify-center items-center bg-white border rounded-md px-3">
             <img src={EmailImg} className="w-4 h-4" />
             <input
-              type="emain"
+              type="email"
               placeholder="Emain or Username"
               className=" w-full bg-white py-3 md:py-2 px-3 rounded-md outline-0 text-md"
               onChange={(e) => {
@@ -167,14 +164,20 @@ const Login = () => {
           <div className="w-full h-fit flex justify-center items-center bg-white border rounded-md px-3 mt-3">
             <img src={Locked} className="w-4 h-4" />
             <input
-              type="Password"
+              type={showPass ? "text" : "password"}
               placeholder="Password"
               className="w-full bg-white py-3 md:py-2 px-3 rounded-md outline-0 text-md"
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
             />
-            <img src={View} className="w-4 h-4 cursor-pointer"/>
+            <img
+              src={View}
+              className="w-4 h-4 cursor-pointer"
+              onClick={() => {
+                setShowPass(!showPass);
+              }}
+            />
           </div>
 
           <p className="text-end mt-3 md:mt-1 text-blue-700 cursor-pointer md:text-md hover:text-red-400 transition-all duration-250 ease">
