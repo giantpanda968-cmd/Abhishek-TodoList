@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
+const mongoose=require("mongoose");
 
-const taskSchema = new mongoose.Schema({
-  title: String,
-});
+const taskSchema=mongoose.Schema({
+    task:String
+})
 
-const taskModel = mongoose.model("Task", taskSchema);
+const taskModel=mongoose.model("task",taskSchema);
 
-module.exports = taskModel;
+module.exports=taskModel;

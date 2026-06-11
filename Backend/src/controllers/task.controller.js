@@ -1,43 +1,58 @@
 const taskModel = require("../models/task.model");
 
-// UserPost-Method----
-async function usertask(req, res) {
-  const { title } = req.body;
+// post Method
+async function userTask(req, res) {
+  const { task } = req.body;
 
-  await taskModel.create({ title });
+  await taskModel.create({
+    task,
+  });
 
   res.status(201).json({
-    message: "Task Created",
+    message: "task created succesfully",
   });
 }
 
-// GetTask-Method.....
-async function gettask(req, res) {
+// GetMethod
+
+async function getTask(req, res) {
   const task = await taskModel.find();
 
+  if (!task || task.length === 0) {
+    res.status(404).json({
+      message: "No task found",
+    });
+    return;
+  }
+
   res.status(200).json({
-    message: "Data Fetch",
-    task: task,
+    message: "Task fectch successfully",
+    task:task,
   });
 }
 
-//ClearAlltask -Method......
-async function deleteAlltask(req, res) {
+// Delete method
+
+async function deleteTask(req, res) {
+  const { id } = req.params;
+
+  await taskModel.findByIdAndDelete(id);
+
+  res.status(200).json({
+    message: "Task deleted successfully",
+  });
+}
+
+//Clear all Task
+
+async function clearAllTask(req,res) {
+
+
   await taskModel.deleteMany({});
 
   res.status(200).json({
-    message: "Delete All Task",
-  });
-}
-// DelteOneTask-Method.....
-async function deleteOnetask(req, res) {
-  const id = req.params.id;
-  await taskModel.findOneAndDelete({
-    _id: id,
-  });
-  res.status(200).json({
-    message: "Delete one task",
-  });
+    message:"All Task Deleted succesfully"
+  })
 }
 
-module.exports = { usertask, gettask, deleteAlltask, deleteOnetask };
+module.exports = { userTask, getTask,deleteTask,clearAllTask};

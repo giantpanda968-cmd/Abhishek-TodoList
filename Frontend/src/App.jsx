@@ -1,15 +1,21 @@
-import { Routes, Route } from "react-router-dom";
+import React from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Feed from "./pages/feed";
+import { Toaster } from "react-hot-toast";
+import Signup from "./pages/signup";
 import Login from "./pages/login";
-import Sign from "./pages/sign";
 
-const App = () =>{
+const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Sign/>}/>
-      <Route path="/Login" element={<Login/>}/>
-      <Route path="/feed" element={<Feed/>}/>
-    </Routes>
+    <div>
+      <Toaster position="top-right" />
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/task" element={<Feed />} />
+      </Routes>
+    </div>
   );
 };
 

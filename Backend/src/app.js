@@ -1,26 +1,14 @@
-const express = require("express");
-const cors = require("cors");
-const taskRoutes = require("./routes/task.routes");
-const authRoutes=require("./routes/auth.routes");
-const cookieParser=require("cookie-parser");
+const express=require("express");
+const taskRoutes=require("./routes/task.routes");
+const userRoutes=require("./routes/user.routes");
+const cors=require('cors')
 
-const app = express();
+const app=express();
 
-app.use(express.json()); //MiddleWare
-app.use(cookieParser());
+app.use(express.json());
+app.use(cors());
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "http://192.168.1.4:5173",
-      "https://todo-list-nine-amber-67.vercel.app", // ← add karo
-      
-    ],
-    credentials: true,
-  }),
-);
+app.use("/api/user",taskRoutes);
+app.use("/api/user",userRoutes);
 
-app.use("/api/task", taskRoutes);
-app.use("/api/auth",authRoutes);
-module.exports = app;
+module.exports=app
