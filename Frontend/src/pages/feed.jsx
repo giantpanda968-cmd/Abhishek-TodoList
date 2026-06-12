@@ -9,7 +9,7 @@ const Feed = () => {
   const onsubmithandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/api/user/task", {
+      const response = await axios.post("https://abhishek-todolist.onrender.com/api/user/task", {
         task,
       });
       toast.success(response.data.message);
@@ -22,7 +22,7 @@ const Feed = () => {
 
   const gettask = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/user/task");
+      const res = await axios.get("https://abhishek-todo-list.vercel.app/api/user/task");
       setUserTask(res.data.task);
     } catch (error) {
       console.log(error);
@@ -37,7 +37,7 @@ const Feed = () => {
   const deleteTask = async (id) => {
     try {
       const res = await axios.delete(
-        `http://localhost:3000/api/user/task/${id}`,
+        `https://abhishek-todo-list.vercel.app/api/user/task/${id}`,
       );
       toast.success(res.data.message);
 
@@ -52,7 +52,7 @@ const Feed = () => {
   // delete Many
   const allTaskdelete = async () => {
     try {
-      const res = await axios.delete("http://localhost:3000/api/user/task");
+      const res = await axios.delete("https://abhishek-todo-list.vercel.app/api/user/task");
       toast.success(res.data.message);
       setUserTask([]);
     } catch (error) {
